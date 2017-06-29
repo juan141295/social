@@ -14,7 +14,20 @@ class ProgramaController extends Controller
      */
     public function index()
     {
-        //
+        //carga la relacion con usuarios
+        //$programas = Programa::all()->load('users');
+        //carga la relacion con usuarios, especificando la columna
+        //$programas = Programa::where('nombre','!=','Finanzas')->get();
+        //Consulta avanzada, con with se pasa un arreglo, con whereHas no se utilizan arreglos
+       // $programas = Programa::with(['users'=>function ($query)
+         //   {
+          //      $query->where('rol','Prestador');
+          //  }])->get();
+        $programas = Programa::whereHas('users', function($query) {
+            $query->where('rol','Prestador');
+            $query->where('nombre','Pedro');
+        })->get();
+        return view('programa.indexPrograma',compact('programas'));
     }
 
     /**

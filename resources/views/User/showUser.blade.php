@@ -26,6 +26,9 @@
                             <td>{{ $user->carrera->carrera }}</td>
                             <td>{{ $user->rol }}</td>
                         </tr>
+                        <tr>
+                            <td colspan="6">Programa: {{ $user->programas()->first() !== null ? $user->programas()->first()->nombre : "No asignado" }}</td>
+                        </tr>
                         </body>
                     </table>
             </div>
